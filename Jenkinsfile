@@ -69,24 +69,24 @@ pipeline {
                  }
              }
         }
-	    stage ('Cleanup Artifacts') {
-             steps {
-                 script {
-                      sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-                      sh "docker rmi ${IMAGE_NAME}:latest"
-                 }
-             }
+	stage ('Cleanup Artifacts') {
+            steps {
+                script {
+                     sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                     sh "docker rmi ${IMAGE_NAME}:latest"
+                }
+            }
         }
-        post {
-           always {
-              emailext attachLog: true,
-                 subject: "'${currentBuild.result}'",
-                 body: "Project: ${env.JOB_NAME}<br/>" +
-                     "Build Number: ${env.BUILD_NUMBER}<br/>" +
-                     "URL: ${env.BUILD_URL}<br/>",
-                 to: 'henogez@gmail.com',                              
-                 attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
-           }
+    }
+    post {
+        always {
+           emailext attachLog: true,
+               subject: "'${currentBuild.result}'",
+               body: "Project: ${env.JOB_NAME}<br/>" +
+                   "Build Number: ${env.BUILD_NUMBER}<br/>" +
+                   "URL: ${env.BUILD_URL}<br/>",
+               to: 'henogez@gmail.com',                              
+               attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }
 }
