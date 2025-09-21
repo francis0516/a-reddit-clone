@@ -29,10 +29,9 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube-Server') {
                     sh """
-					  /home/hogege/ /home/hogege/ /home/hogege/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner/bin/sonar-scanner \
+					  /home/hogege/ /home/hogege/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner/bin/sonar-scanner \
                         -Dsonar.projectName=Reddit-Clone-CI \
-                        -Dsonar.projectKey=Reddit-Clone-CI \
-					    -Dsonar.sources=.
+                        -Dsonar.projectKey=Reddit-Clone-CI
 	                """
                 }
             }
